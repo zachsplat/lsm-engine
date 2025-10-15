@@ -8,7 +8,6 @@ Memtable::Memtable(size_t max_size)
 void Memtable::put(const std::string& key, const std::string& value) {
     auto it = data_.find(key);
     if (it != data_.end()) {
-        // update: adjust size
         current_size_ -= it->second.size();
         it->second = value;
     } else {
@@ -21,12 +20,12 @@ void Memtable::put(const std::string& key, const std::string& value) {
 std::optional<std::string> Memtable::get(const std::string& key) const {
     auto it = data_.find(key);
     if (it == data_.end()) return std::nullopt;
-    if (it->second == TOMBSTONE) return std::nullopt;
+    if (is_tombstone(it->second)) return std::nullopt;
     return it->second;
 }
 
 void Memtable::remove(const std::string& key) {
-    put(key, TOMBSTONE);
+    put(key, TOMBSTONE_MARKER);
 }
 
 bool Memtable::is_full() const {
