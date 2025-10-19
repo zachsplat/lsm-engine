@@ -9,6 +9,7 @@ add_library(lsm
     src/sstable.cpp
     src/bloom.cpp
     src/db.cpp
+    src/wal.cpp
 )
 target_include_directories(lsm PUBLIC include)
 
