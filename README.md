@@ -17,3 +17,11 @@ make
 ## usage
 
 it's a library, not a standalone thing. see test/ for examples.
+
+## todo
+
+- [ ] size-tiered compaction (code exists but not tested)
+- [ ] leveled compaction
+- [ ] compression (snappy?)
+- [ ] concurrent reads during flush
+- [ ] proper benchmarks
